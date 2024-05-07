@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    My Cars
+    <hr />
+    <div id="carList">waga</div>
+    <hr>
+    <button onclick="addCar()">Add</button>
+    <br>
+    type:<input id="cType">
+    color: <input type="color" id="cColor">
+    model: <input type="number" id="cNum" min="2000">
+    customer: <input id="cCustoomer">
+    <script>
+      let cars = [
+        { type: "kia", color: "red", model: 2015, customer: "isimoto" },
+        { type: "volvo", color: "yellow", model: 2018, customer: "coral" },
+        { type: "tsla", color: "blue", model: 2013, customer: "itamar" },
+      ];
+    
+      function addCar(){
+        cars.push( { type: cType.value, color: cColor.value, model: cNum.value, customer: cCustoomer.value })
+        displayCars()
+      }
+      function delCar(ind){
+        cars.splice(ind,1)
+        displayCars()
+      }
+      function updCar(ind){
+        console.log(ind);
+        cars[ind].color =cColor.value
+        cars[ind].type =cType.value
+        displayCars()
+      }
+      function displayCars() {
+        carList.innerHTML = cars
+          .map((car,ind) => `
+        <div>
+            color: ${car.color}
+            customer: ${car.customer}
+            model: ${car.model}
+            type: ${car.type}
+            <button onclick='delCar(${ind})'>Del</button>
+            <button onclick='updCar(${ind})'>UPD</button>
+        </div>`
+          ).join("");
+      }
+      displayCars();
+    </script>
+  </body>
+</html>

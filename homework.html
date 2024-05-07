@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        #HERE {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            max-width: 500px;
+            overflow-x: auto;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="displayData()">PUSH ME</button>
+    <div id="HERE"></div>
+
+    <script>
+        const SERVER = "https://jsonplaceholder.typicode.com/users/";
+        const SERVER1 = "https://jsonplaceholder.typicode.com/todos/";
+        const SERVER2 = "https://jsonplaceholder.typicode.com/comments/";
+
+        const load = (server) => axios.get(server).then((response) => {
+            const data = response.data;
+            const formattedData = data.map(item => `<li><h3>${JSON.stringify(item)}</h3></li>`).join('');
+            document.getElementById('HERE').innerHTML += `<ul>${formattedData}</ul>`;
+        });
+
+        function displayData() {
+            load(SERVER);
+            load(SERVER1);
+            load(SERVER2);
+        }
+    </script>
+</body>
+
+</html>
